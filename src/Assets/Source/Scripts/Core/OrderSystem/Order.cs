@@ -16,9 +16,6 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
 
         public void Add(BodyPart bodyPart, int orderPartCount)
         {
-            if (bodyPart == BodyPart.None)
-                return;
-
             if (orderPartCount < 1)
                 return;
 

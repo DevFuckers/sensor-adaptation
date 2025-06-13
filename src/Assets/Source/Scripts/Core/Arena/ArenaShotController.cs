@@ -31,12 +31,6 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 
         private void OnMobShot(BodyPart bodyPart)
         {
-            if (bodyPart == BodyPart.None)
-            {
-                Debug.LogError("ArenaShotController::OnMobShot() bodyPart is nonoe");
-                return;
-            }
-
             _playerActiveOrdersModel.UpdateActiveOrders(bodyPart, count: 1);
         }
 
