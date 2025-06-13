@@ -3,24 +3,33 @@ using DevFuckers.Assets.Source.Scripts.Core.Mob;
 using DevFuckers.Assets.Source.Scripts.Core.OrderSystem;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.Input;
 using UnityEngine;
-using Zenject;
 
 namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 {
-    public class ArenaShotPerformer : MonoBehaviour
+    public class ArenaShotPerformer
     {
         public event Action<BodyPart> MobShot = delegate { };
          
-        [Inject] private InputHandler _inputHandler;
+        private InputHandler _inputHandler;
 
-        void Start()
+    
+        public void Init(InputHandler inputHandler)
         {
+            if (inputHandler == null)
+            {
+                Debug.LogError("ArenaShotPerformer::Init() inputHandler is null");
+                return;
+            }
+
+            _inputHandler = inputHandler;
+
             _inputHandler.Click += OnClickPerformed;
         }
 
-        void OnDisable()
+        public void OnDisable()
         {
-            _inputHandler.Click -= OnClickPerformed;
+            if (_inputHandler != null)
+                _inputHandler.Click -= OnClickPerformed;
         }
 
         private void OnClickPerformed()

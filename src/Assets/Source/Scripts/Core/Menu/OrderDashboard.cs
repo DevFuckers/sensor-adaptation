@@ -3,7 +3,7 @@ using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.AssetLoad;
 using UnityEngine;
 using Zenject;
 
-namespace DevFuckers
+namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 {
     public class OrderDashboard : MonoBehaviour
     {
@@ -27,8 +27,8 @@ namespace DevFuckers
 
         private Vector2 GetRandomPosition(Vector2 size, float xOffset, float yOffset)
         {
-            float x = Random.Range((-size.x / 2f) + xOffset, (size.x / 2f) - xOffset);
-            float y = Random.Range((-size.y / 2f) + yOffset, (size.y / 2f) - yOffset);
+            float x = Random.Range(-size.x / 2f + xOffset, size.x / 2f - xOffset);
+            float y = Random.Range(-size.y / 2f + yOffset, size.y / 2f - yOffset);
             return new Vector2(x, y);
         }
 

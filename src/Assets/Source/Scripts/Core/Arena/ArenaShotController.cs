@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 {
-    public class ArenaShotController : MonoBehaviour
+    public class ArenaShotController
     {
         private ArenaShotPerformer _arenaShotPerformer;
         private PlayerActiveOrdersModel _playerActiveOrdersModel;
@@ -36,13 +36,14 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
                 Debug.LogError("ArenaShotController::OnMobShot() bodyPart is nonoe");
                 return;
             }
-            
+
             _playerActiveOrdersModel.UpdateActiveOrders(bodyPart, count: 1);
         }
 
-        void OnDisable()
+        public void OnDisable()
         {
-            _arenaShotPerformer.MobShot -= OnMobShot;
+            if (_arenaShotPerformer != null)
+                _arenaShotPerformer.MobShot -= OnMobShot;
         }
     }
 }
