@@ -12,7 +12,6 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
          
         private InputHandler _inputHandler;
 
-    
         public void Init(InputHandler inputHandler)
         {
             if (inputHandler == null)

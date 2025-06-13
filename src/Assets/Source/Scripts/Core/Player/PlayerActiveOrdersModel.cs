@@ -78,10 +78,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Player
             }
         }
 
-        public List<Order> GetActiveOrders()
-        {
-            return _orders;
-        }
+        public bool IsActiveOrdersEmpty()
+            => _orders.Count == 0;
 
         private bool IsOrderEmpty(Order order)
         {

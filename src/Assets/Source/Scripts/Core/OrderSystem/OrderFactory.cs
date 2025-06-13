@@ -1,7 +1,6 @@
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Helpers;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.AssetLoad;
 using UnityEngine;
-using Zenject;
 using System;
 
 namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem

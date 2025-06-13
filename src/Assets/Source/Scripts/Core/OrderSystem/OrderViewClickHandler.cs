@@ -1,29 +1,28 @@
 using System;
 using DevFuckers.Assets.Source.Scripts.Core.Player;
 using UnityEngine;
-using Zenject;
 
 namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
 {
-    public class OrderViewController : IDisposable
+    public class OrderViewClickHandler : IDisposable
     {
-        [Inject] private PlayerActiveOrdersModel _playerActiveOrdersModel;
+        private PlayerActiveOrdersModel _playerActiveOrdersModel;
         private OrderView _orderView;
-        
 
-        public OrderViewController(OrderView orderView)
+        public OrderViewClickHandler(OrderView orderView, PlayerActiveOrdersModel playerActiveOrdersModel)
         {
             _orderView = orderView;
+            _playerActiveOrdersModel = playerActiveOrdersModel;
 
-            _orderView.OrderClicked += OnOrderClicked;
+            _orderView.OrderWidgetClicked += OnOrderWidgetClicked;
         }
 
         public void Dispose()
         {
-            _orderView.OrderClicked -= OnOrderClicked;
+            _orderView.OrderWidgetClicked -= OnOrderWidgetClicked;
         }
 
-        private void OnOrderClicked(Order order, bool toAdd)
+        private void OnOrderWidgetClicked(Order order, bool toAdd)
         {
             if (order == null)
             {
@@ -35,7 +34,6 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
                 _playerActiveOrdersModel.AddActiveOrder(order);
             else
                 _playerActiveOrdersModel.RemoveActiveOrder(order);
-
         }
     }
 }

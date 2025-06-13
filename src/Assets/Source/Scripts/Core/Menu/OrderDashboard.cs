@@ -1,19 +1,25 @@
+using System.Collections.Generic;
 using DevFuckers.Assets.Source.Scripts.Core.OrderSystem;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.AssetLoad;
 using UnityEngine;
-using Zenject;
 
 namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 {
     public class OrderDashboard : MonoBehaviour
     {
-        [Inject] private ResourcesAssetLoader _resourcesAssetLoader;
         [SerializeField] private RectTransform _dashboard;
 
-        void Start()
+        public List<OrderView> InitOrderViews(ResourcesAssetLoader resourcesAssetLoader)
         {
+            if (resourcesAssetLoader == null)
+            {
+                Debug.LogError("OrderDashboard::InitOrderViews() resourcesAssetLoader is null");
+                return null;
+            }
+            
+            List<OrderView> orderViewList = new List<OrderView>();
             OrderBuilder orderBuilder = new OrderBuilder();
-            OrderFactory orderFactory = new OrderFactory(orderBuilder, _resourcesAssetLoader);
+            OrderFactory orderFactory = new OrderFactory(orderBuilder, resourcesAssetLoader);
 
             Vector2 size = _dashboard.rect.size;
 
@@ -22,7 +28,10 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
                 var view = orderFactory.CreateOrder();
                 view.transform.SetParent(_dashboard.transform);
                 view.transform.localPosition = GetRandomPosition(size, view.transform.localScale.x, view.transform.localScale.y);
+                orderViewList.Add(view);
             }
+
+            return orderViewList;
         }
 
         private Vector2 GetRandomPosition(Vector2 size, float xOffset, float yOffset)
