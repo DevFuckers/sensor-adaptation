@@ -9,21 +9,21 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
     {
         [SerializeField] private RectTransform _dashboard;
 
-        public List<OrderView> InitOrderViews(ResourcesAssetLoader resourcesAssetLoader)
+        public List<OrderView> InitOrderViews(ResourcesAssetLoader resourcesAssetLoader, int availableOrdersCount = 3)
         {
             if (resourcesAssetLoader == null)
             {
                 Debug.LogError("OrderDashboard::InitOrderViews() resourcesAssetLoader is null");
                 return null;
             }
-            
+
             List<OrderView> orderViewList = new List<OrderView>();
             OrderBuilder orderBuilder = new OrderBuilder();
             OrderFactory orderFactory = new OrderFactory(orderBuilder, resourcesAssetLoader);
 
             Vector2 size = _dashboard.rect.size;
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < availableOrdersCount; i++)
             {
                 var view = orderFactory.CreateOrder();
                 view.transform.SetParent(_dashboard.transform);

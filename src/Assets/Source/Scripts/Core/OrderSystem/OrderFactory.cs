@@ -21,7 +21,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
         public OrderView CreateOrder()
         {
             for (int i = 0; i < UnityEngine.Random.Range(1, 5); i++)
-                _orderBuilder.AddPart(GetRandomBodyPart(), UnityEngine.Random.Range(0, 5));
+                _orderBuilder.AddPart(GetRandomBodyPart(), UnityEngine.Random.Range(1, 5));
 
             OrderView orderViewInstance = UnityEngine.Object.Instantiate(_orderViewPrefab, Vector3.zero, Quaternion.identity);
             orderViewInstance.Init(_orderBuilder.Create());

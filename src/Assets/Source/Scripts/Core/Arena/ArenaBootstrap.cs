@@ -7,6 +7,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 {
     public class ArenaBootstrap : MonoBehaviour
     {
+        [SerializeField] private ArenaActiveOrdersView _arenaActiveOrdersView;
+
         [Inject] private InputHandler _inputHandler;
         [Inject] private PlayerActiveOrdersModel _playerActiveOrdersModel;
 
@@ -19,7 +21,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
             _arenaShotController = new ArenaShotController();
 
             _arenaShotPerformer.Init(_inputHandler);
-            _arenaShotController.Init(_arenaShotPerformer,_playerActiveOrdersModel);
+            _arenaShotController.Init(_arenaShotPerformer, _playerActiveOrdersModel);
+            _arenaActiveOrdersView.Init(_playerActiveOrdersModel);
         }
 
         void OnDisable()

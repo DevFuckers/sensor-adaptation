@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DevFuckers.Assets.Source.Scripts.Core.OrderSystem;
 using ModestTree;
@@ -7,7 +8,11 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Player
 {
     public class PlayerActiveOrdersModel
     {
+        public event Action ActiveOrdersChanged = delegate { };
+
         private List<Order> _orders;
+        
+        public IEnumerable<Order> ActiveOrders => _orders; 
 
         public PlayerActiveOrdersModel()
         {
@@ -23,6 +28,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Player
             }
 
             _orders.Add(order);
+
+            ActiveOrdersChanged?.Invoke();
         }
 
         public void RemoveActiveOrder(Order order)
@@ -34,6 +41,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Player
             }
 
             _orders.Remove(order);
+
+            ActiveOrdersChanged?.Invoke();
         }
 
         public void UpdateActiveOrders(BodyPart bodyPart, int count = 1)
@@ -76,10 +85,13 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Player
             {
                 RemoveActiveOrder(orderToRemove);
             }
+
+            ActiveOrdersChanged?.Invoke();
         }
 
         public bool IsActiveOrdersEmpty()
             => _orders.Count == 0;
+
 
         private bool IsOrderEmpty(Order order)
         {

@@ -605,6 +605,7 @@ MonoBehaviour:
   _orderDashboard: {fileID: 1816874731}
   _menuSelectingOrderHandler: {fileID: 255661909}
   _startGameButton: {fileID: 432811595}
+  _availableOrdersCount: 6
 --- !u!4 &1199358049
 Transform:
   m_ObjectHideFlags: 0
