@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
-{    
+{
     public class Order
     {
         private List<OrderPart> _parts;
@@ -15,7 +16,24 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
 
         public void Add(BodyPart bodyPart, int orderPartCount)
         {
+            if (bodyPart == BodyPart.None)
+                return;
+
+            if (orderPartCount < 1)
+                return;
+
             _parts.Add(new OrderPart(bodyPart, orderPartCount));
+        }
+
+        public void Remove(OrderPart orderPart)
+        {
+            if (orderPart == null)
+            {
+                Debug.LogError("Order::Remove() orderPart is null");
+                return;
+            }
+
+            _parts.Remove(orderPart);
         }
     }
 }

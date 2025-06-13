@@ -23,7 +23,6 @@ namespace DevFuckers
                 view.transform.SetParent(_dashboard.transform);
                 view.transform.localPosition = GetRandomPosition(size, view.transform.localScale.x, view.transform.localScale.y);
             }
-
         }
 
         private Vector2 GetRandomPosition(Vector2 size, float xOffset, float yOffset)

@@ -10,6 +10,12 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
 
         public void Init(OrderPart orderPart)
         {
+            if (orderPart == null)
+            {
+                Debug.LogError("OrderPartView::Init() orderPart is null");
+                return;
+            }
+            
             _orderPartName.text = orderPart.BodyPart.ToString();
             _orderPartCount.text = orderPart.Count.ToString();
         }
