@@ -1,16 +1,14 @@
-using UnityEngine;
+using DevFuckers.Assets.Source.Scripts.Core.Player;
+using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.AssetLoad;
+using Zenject;
 
-public class GameplayInstaller : MonoBehaviour
+public class GameplayInstaller : MonoInstaller
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void InstallBindings()
     {
-        
-    }
+        // base.InstallBindings();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Container.Bind<ResourcesAssetLoader>().AsSingle();
+        Container.Bind<PlayerActiveOrdersModel>().AsSingle();
     }
 }
