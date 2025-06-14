@@ -1,6 +1,6 @@
 namespace DevFuckers.Assets.Source.Scripts.Infrastructure.Helpers
 {
-    public class AssetPaths
+    public class GameStaticData
     {
         public const string ORDER_VIEW_PREFAB = "Prefabs/OrderWidget";
         public const string GAMEPLAY_SCENE = "Gameplay";

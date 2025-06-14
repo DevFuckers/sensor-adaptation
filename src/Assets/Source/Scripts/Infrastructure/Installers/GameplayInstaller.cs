@@ -1,3 +1,4 @@
+using DevFuckers.Assets.Source.Scripts.Core.Arena;
 using DevFuckers.Assets.Source.Scripts.Core.Player;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.AssetLoad;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.Config;
@@ -12,5 +13,6 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<PlayerActiveOrdersModel>().AsSingle();
         Container.Bind<InputHandler>().AsSingle();
         Container.Bind<ConfigProvider>().AsSingle();
+        Container.BindInterfacesAndSelfTo<ArenaDataProviderMock>().AsSingle();
     }
 }

@@ -15,6 +15,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
         [Inject] private PlayerActiveOrdersModel _activeOrdersModel;
         [Inject] private ConfigProvider _configProvider;
 
+        [SerializeField] private string _startGameButtonSceneName = GameStaticData.GAMEPLAY_SCENE;
+        
         [SerializeField] private OrderDashboard _orderDashboard;
         [SerializeField] private MenuSelectingOrderHandler _menuSelectingOrderHandler;
         [SerializeField] private ChangeSceneButton _startGameButton;
@@ -33,7 +35,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
             foreach (var view in orderViews)
                 _menuSelectingOrderHandler.LinkOrderView(view);
 
-            _startGameButton.StartListenToClick(AssetPaths.GAMEPLAY_SCENE);
+            _startGameButton.StartListenToClick(_startGameButtonSceneName);
         }
 
         void OnDisable()

@@ -9,13 +9,16 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 {
     public class ArenaBootstrap : MonoBehaviour
     {
+        [SerializeField] private string _endGameButtonSceneName = GameStaticData.MENU_SCENE;
+        
         [SerializeField] private ArenaActiveOrdersView _arenaActiveOrdersView;
         [SerializeField] private ArenaPreyOffScreenCounter _arenaPreyOffScreenCounter;
         [SerializeField] private ChangeSceneButton _endGameButton;
-
+        
         [Inject] private InputHandler _inputHandler;
         [Inject] private PlayerActiveOrdersModel _playerActiveOrdersModel;
-
+        [Inject] private IArenaDataProvider _arenaDataProvider;
+        
         private ArenaShotController _arenaShotController;
         private ArenaShotPerformer _arenaShotPerformer;
         private ArenaGameOverController _arenaGameOverController;
@@ -32,7 +35,9 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
             _arenaGameOverController.Init(_playerActiveOrdersModel, _arenaPreyOffScreenCounter, _endGameButton.gameObject);
             // _arenaPreyOffScreenCounter.Init(); нужен count 
 
-            _endGameButton.StartListenToClick(AssetPaths.MENU_SCENE);
+            _endGameButton.StartListenToClick(_endGameButtonSceneName);
+            
+            print("ArenaBootstrap::Start() - Prey count: " + _arenaDataProvider.ArenaData.PreyCount);
         }
 
         void OnDisable()
