@@ -1,4 +1,3 @@
-using DevFuckers.Assets.Source.Scripts.Infrastructure.Helpers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,10 +16,14 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 
         public void StartListenToClick(string sceneNameToSwitch)
         {
-            _button.interactable = true;
             _sceneNammeToSwitch = sceneNameToSwitch;
 
             _button.onClick.AddListener(OnButtonClicked);
+        }
+
+        public void SetInteractable(bool interactable)
+        {
+            _button.interactable = interactable;
         }
 
         void OnDestroy()

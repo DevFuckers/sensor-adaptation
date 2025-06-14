@@ -19,31 +19,26 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
         [SerializeField] private MenuSelectingOrderHandler _menuSelectingOrderHandler;
         [SerializeField] private ChangeSceneButton _startGameButton;
 
-        private List<OrderViewClickHandler> _orderViewClickHandlers;
+        private OrderViewClickHandler _orderViewClickHandler;
 
         void Start()
         {
             _configProvider.LoadAll();
 
-            _orderViewClickHandlers = new List<OrderViewClickHandler>();
             List<OrderView> orderViews = _orderDashboard.InitOrderViews(_resourcesAssetLoader, _configProvider.GlobalGameSettings);
+            _orderViewClickHandler = new OrderViewClickHandler(orderViews, _activeOrdersModel);
 
-            _menuSelectingOrderHandler.Init(_activeOrdersModel, _startGameButton.gameObject);
+            _menuSelectingOrderHandler.Init(_activeOrdersModel, _startGameButton);
 
             foreach (var view in orderViews)
-            {
-                OrderViewClickHandler orderViewClickHandler = new OrderViewClickHandler(view, _activeOrdersModel);
-                _orderViewClickHandlers.Add(orderViewClickHandler);
                 _menuSelectingOrderHandler.LinkOrderView(view);
-            }
 
             _startGameButton.StartListenToClick(AssetPaths.GAMEPLAY_SCENE);
         }
 
         void OnDisable()
         {
-            _orderViewClickHandlers.ForEach(x => x.Dispose());
-            _orderViewClickHandlers.Clear();
+            _orderViewClickHandler.Dispose();
 
             _menuSelectingOrderHandler.UnlinkAll();
         }

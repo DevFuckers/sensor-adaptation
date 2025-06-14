@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DevFuckers.Assets.Source.Scripts.Core.Player;
 using UnityEngine;
 
@@ -7,33 +8,50 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
     public class OrderViewClickHandler : IDisposable
     {
         private PlayerActiveOrdersModel _playerActiveOrdersModel;
-        private OrderView _orderView;
+        private List<OrderView> _orderView;
+        private OrderView _activeOrderView;
 
-        public OrderViewClickHandler(OrderView orderView, PlayerActiveOrdersModel playerActiveOrdersModel)
+        public OrderViewClickHandler(List<OrderView> orderViews, PlayerActiveOrdersModel playerActiveOrdersModel)
         {
-            _orderView = orderView;
+            _orderView = orderViews;
             _playerActiveOrdersModel = playerActiveOrdersModel;
 
-            _orderView.OrderWidgetClicked += OnOrderWidgetClicked;
+            foreach (var view in _orderView)
+                view.OrderWidgetClicked += OnOrderWidgetClicked;
         }
 
         public void Dispose()
         {
-            _orderView.OrderWidgetClicked -= OnOrderWidgetClicked;
+            foreach (var view in _orderView)
+                view.OrderWidgetClicked -= OnOrderWidgetClicked;       
         }
 
-        private void OnOrderWidgetClicked(Order order, bool toAdd)
+        private void OnOrderWidgetClicked(OrderView widget, bool toAdd)
         {
-            if (order == null)
+            if (widget == null)
             {
-                Debug.LogError("OrderViewController::OnOrderClicked() order is null");
+                Debug.LogError("OrderViewController::OnOrderClicked() widget is null");
                 return;
             }
 
-            if (toAdd)
-                _playerActiveOrdersModel.AddActiveOrder(order);
+            if (_activeOrderView == widget)
+            {
+                _playerActiveOrdersModel.RemoveActiveOrder(widget.Order);
+                _activeOrderView.SetSelected(false);
+                _activeOrderView = null;
+            }
             else
-                _playerActiveOrdersModel.RemoveActiveOrder(order);
+            {
+                if (_activeOrderView != null)
+                {
+                    _activeOrderView.SetSelected(false);
+                    _playerActiveOrdersModel.RemoveActiveOrder(_activeOrderView.Order);
+                }
+
+                _playerActiveOrdersModel.AddActiveOrder(widget.Order);
+                _activeOrderView = widget;
+                _activeOrderView.SetSelected(true);
+            }
         }
     }
 }

@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 1980411182990059724}
   - component: {fileID: 314127222302232172}
   - component: {fileID: 2201996748826089589}
+  - component: {fileID: 3378150553376190874}
   m_Layer: 5
   m_Name: OrderWidget
   m_TagString: Untagged
@@ -306,6 +307,26 @@ MonoBehaviour:
   _orderPartPrefab: {fileID: 37078818783654841, guid: f72e529c733028e4a8c561d04a7a5c23, type: 3}
   _orderPartsParent: {fileID: 2693540857122256242}
   _selectingWidget: {fileID: 6377206780664207240}
+--- !u!114 &3378150553376190874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893579303559040061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 150
+  m_PreferredHeight: 150
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &6223195845710777515
 GameObject:
   m_ObjectHideFlags: 0

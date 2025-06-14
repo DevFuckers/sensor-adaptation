@@ -7,17 +7,17 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 {
     public class MenuSelectingOrderHandler : MonoBehaviour
     {
-        private GameObject _playButtonObjectIfOrderSelected;
+        private ChangeSceneButton _playButtonObjectIfOrderSelected;
         private List<OrderView> _linkedViews;
         private PlayerActiveOrdersModel _playerActiveOrdersModel;
 
-        public void Init(PlayerActiveOrdersModel playerActiveOrdersModel, GameObject playButtonObjectIfOrderSelected)
+        public void Init(PlayerActiveOrdersModel playerActiveOrdersModel, ChangeSceneButton playButtonObjectIfOrderSelected)
         {
             _playerActiveOrdersModel = playerActiveOrdersModel;
             _playButtonObjectIfOrderSelected = playButtonObjectIfOrderSelected;
             _linkedViews = new List<OrderView>();
 
-            _playButtonObjectIfOrderSelected.SetActive(!_playerActiveOrdersModel.IsActiveOrdersEmpty());
+            playButtonObjectIfOrderSelected.SetInteractable(!_playerActiveOrdersModel.IsActiveOrdersEmpty());
         }
 
         public void LinkOrderView(OrderView orderView)
@@ -40,7 +40,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
             _linkedViews.Clear();
         }
 
-        private void OnOrderClicked(Order order, bool isSelected)
+        private void OnOrderClicked(OrderView widget, bool isSelected)
         {
             if (_playButtonObjectIfOrderSelected == null)
             {
@@ -48,7 +48,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
                 return;
             }
             
-            _playButtonObjectIfOrderSelected.SetActive(!_playerActiveOrdersModel.IsActiveOrdersEmpty());
+            _playButtonObjectIfOrderSelected.SetInteractable(!_playerActiveOrdersModel.IsActiveOrdersEmpty());
         }
     }
 }

@@ -28,7 +28,6 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
             {
                 var view = orderFactory.CreateOrder(gameSettings.OrderMaxParts, gameSettings.OrderMaxCountForPart);
                 view.transform.SetParent(_dashboard.transform);
-                view.transform.localPosition = GetRandomPosition(size, view.transform.localScale.x, view.transform.localScale.y);
                 orderViewList.Add(view);
             }
 
