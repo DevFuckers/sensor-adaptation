@@ -41,7 +41,9 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 #if UNITY_EDITOR                
                 Debug.Log("Клик по: " + hit.collider.gameObject.name);
 #endif
-                MobShot.Invoke(hit.collider.GetComponent<Prey>().BodyPart);
+                if (hit.collider.TryGetComponent(out Prey prey))
+                    if (prey != null)
+                        MobShot.Invoke(prey.BodyPart);
             }
         }
     }

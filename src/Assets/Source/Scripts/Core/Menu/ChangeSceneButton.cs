@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 {
-    public class StartGameButton : MonoBehaviour
+    public class ChangeSceneButton : MonoBehaviour
     {
         [SerializeField] private Button _button;
+        private string _sceneNammeToSwitch;
 
         private void Start()
         {
             _button.interactable = false;
         }
 
-        public void StartListenToClick()
+        public void StartListenToClick(string sceneNameToSwitch)
         {
             _button.interactable = true;
+            _sceneNammeToSwitch = sceneNameToSwitch;
+
             _button.onClick.AddListener(OnButtonClicked);
         }
 
@@ -27,7 +30,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 
         private void OnButtonClicked()
         {
-            SceneManager.LoadScene(AssetPaths.GAMEPLAY_SCENE);
+            SceneManager.LoadScene(_sceneNammeToSwitch);
         }
     }
 }

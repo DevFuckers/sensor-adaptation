@@ -18,10 +18,10 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
             _orderViewPrefab = orderViewPrefab.GetComponent<OrderView>();
         }
 
-        public OrderView CreateOrder()
+        public OrderView CreateOrder(int partCounts, int countForPart)
         {
-            for (int i = 0; i < UnityEngine.Random.Range(1, 5); i++)
-                _orderBuilder.AddPart(GetRandomBodyPart(), UnityEngine.Random.Range(1, 5));
+            for (int i = 0; i < UnityEngine.Random.Range(1, partCounts); i++)
+                _orderBuilder.AddPart(GetRandomBodyPart(), UnityEngine.Random.Range(1, countForPart));
 
             OrderView orderViewInstance = UnityEngine.Object.Instantiate(_orderViewPrefab, Vector3.zero, Quaternion.identity);
             orderViewInstance.Init(_orderBuilder.Create());

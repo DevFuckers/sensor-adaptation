@@ -53,12 +53,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Player
                 return;
             }
 
-            List<Order> ordersToRemove = new();
-
             foreach (var order in _orders)
             {
-                var partsToRemove = new List<OrderPart>();
-
                 foreach (var part in order.Parts)
                 {
                     if (part.BodyPart == bodyPart)
@@ -66,27 +62,17 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Player
                         part.Count -= count;
 
                         if (part.Count <= 0)
-                            partsToRemove.Add(part);
+                            order.RemovePart(part);
+                        
+                        if (IsOrderEmpty(order))
+                            RemoveActiveOrder(order);
+
+                        ActiveOrdersChanged?.Invoke();
+
+                        return;
                     }
                 }
-
-                foreach (var partToRemove in partsToRemove)
-                {
-                    order.Remove(partToRemove);
-                }
-
-                if (IsOrderEmpty(order))
-                {
-                    ordersToRemove.Add(order);
-                }
             }
-
-            foreach (var orderToRemove in ordersToRemove)
-            {
-                RemoveActiveOrder(orderToRemove);
-            }
-
-            ActiveOrdersChanged?.Invoke();
         }
 
         public bool IsActiveOrdersEmpty()

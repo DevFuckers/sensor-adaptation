@@ -7,13 +7,14 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 {
     public class MenuSelectingOrderHandler : MonoBehaviour
     {
-        [SerializeField] private GameObject _playButtonObjectIfOrderSelected;
+        private GameObject _playButtonObjectIfOrderSelected;
         private List<OrderView> _linkedViews;
         private PlayerActiveOrdersModel _playerActiveOrdersModel;
 
-        public void Init(PlayerActiveOrdersModel playerActiveOrdersModel)
+        public void Init(PlayerActiveOrdersModel playerActiveOrdersModel, GameObject playButtonObjectIfOrderSelected)
         {
             _playerActiveOrdersModel = playerActiveOrdersModel;
+            _playButtonObjectIfOrderSelected = playButtonObjectIfOrderSelected;
             _linkedViews = new List<OrderView>();
 
             _playButtonObjectIfOrderSelected.SetActive(!_playerActiveOrdersModel.IsActiveOrdersEmpty());
@@ -41,6 +42,12 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 
         private void OnOrderClicked(Order order, bool isSelected)
         {
+            if (_playButtonObjectIfOrderSelected == null)
+            {
+                Debug.LogError("MenuSelectingOrderHandler::OnOrderClicked() playButton is null");
+                return;
+            }
+            
             _playButtonObjectIfOrderSelected.SetActive(!_playerActiveOrdersModel.IsActiveOrdersEmpty());
         }
     }

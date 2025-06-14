@@ -14,7 +14,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
             _parts = new List<OrderPart>();
         }
 
-        public void Add(BodyPart bodyPart, int orderPartCount)
+        public void AddPart(BodyPart bodyPart, int orderPartCount)
         {
             if (orderPartCount < 1)
                 return;
@@ -22,7 +22,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
             _parts.Add(new OrderPart(bodyPart, orderPartCount));
         }
 
-        public void Remove(OrderPart orderPart)
+        public void RemovePart(OrderPart orderPart)
         {
             if (orderPart == null)
             {

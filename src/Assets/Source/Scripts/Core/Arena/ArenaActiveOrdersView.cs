@@ -12,7 +12,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
         [SerializeField] private Transform _orderPartsParent;
         private PlayerActiveOrdersModel _playerActiveOrdersModel;
         private List<OrderPartView> _orderPartViews = new List<OrderPartView>();
-        private readonly Dictionary<OrderPart, OrderPartView> _activeViews = new();
+        private Dictionary<OrderPart, OrderPartView> _activeViews = new();
 
         public void Init(PlayerActiveOrdersModel playerActiveOrdersModel)
         {
@@ -26,7 +26,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
         private void OnActiveOrdersChanged()
         {
             var currentParts = new HashSet<OrderPart>();
-            
+
             // Собрать актуальные части
             foreach (var order in _playerActiveOrdersModel.ActiveOrders)
             {
@@ -60,6 +60,12 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 
             foreach (var part in toRemove)
                 _activeViews.Remove(part);
+        }
+
+        void OnDisable()
+        {
+            _orderPartViews.Clear();
+            _activeViews.Clear();
         }
     }
 }

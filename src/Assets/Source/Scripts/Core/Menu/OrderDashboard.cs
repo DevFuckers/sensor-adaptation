@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DevFuckers.Assets.Source.Scripts.Configs;
 using DevFuckers.Assets.Source.Scripts.Core.OrderSystem;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.AssetLoad;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
     {
         [SerializeField] private RectTransform _dashboard;
 
-        public List<OrderView> InitOrderViews(ResourcesAssetLoader resourcesAssetLoader, int availableOrdersCount = 3)
+        public List<OrderView> InitOrderViews(ResourcesAssetLoader resourcesAssetLoader, GlobalGameSettings gameSettings)
         {
             if (resourcesAssetLoader == null)
             {
@@ -23,9 +24,9 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Menu
 
             Vector2 size = _dashboard.rect.size;
 
-            for (int i = 0; i < availableOrdersCount; i++)
+            for (int i = 0; i < gameSettings.DashboardOrderMaxCount; i++)
             {
-                var view = orderFactory.CreateOrder();
+                var view = orderFactory.CreateOrder(gameSettings.OrderMaxParts, gameSettings.OrderMaxCountForPart);
                 view.transform.SetParent(_dashboard.transform);
                 view.transform.localPosition = GetRandomPosition(size, view.transform.localScale.x, view.transform.localScale.y);
                 orderViewList.Add(view);

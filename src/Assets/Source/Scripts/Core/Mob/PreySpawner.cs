@@ -1,7 +1,6 @@
-using DevFuckers.Assets.Source.Scripts.Core.Mob;
 using UnityEngine;
 
-namespace DevFuckers
+namespace DevFuckers.Assets.Source.Scripts.Core.Mob
 {
     public class PreySpawner : MonoBehaviour
     {

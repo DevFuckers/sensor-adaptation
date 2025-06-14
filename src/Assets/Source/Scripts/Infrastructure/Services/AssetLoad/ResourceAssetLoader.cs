@@ -6,8 +6,12 @@ namespace DevFuckers.Assets.Source.Scripts.Infrastructure.Services.AssetLoad
     {
         public T Load<T>(string path) where T : Object
         {
-            // Implement loading logic here
-            return Resources.Load<T>(path);
+            var loadedAsset = Resources.Load<T>(path);
+
+            if (loadedAsset == null)
+                Debug.LogError("ResourcesAssetLoader::Load() Can't load asset on path: " + path);
+
+            return loadedAsset;
         }
 
         public void Unload<T>(string path) where T : Object
