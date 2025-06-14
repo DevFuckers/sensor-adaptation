@@ -1,4 +1,5 @@
 using DevFuckers.Assets.Source.Scripts.Core.Menu;
+using DevFuckers.Assets.Source.Scripts.Core.Mob;
 using DevFuckers.Assets.Source.Scripts.Core.Player;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Helpers;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.Input;
@@ -18,6 +19,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
         [Inject] private InputHandler _inputHandler;
         [Inject] private PlayerActiveOrdersModel _playerActiveOrdersModel;
         [Inject] private IArenaDataProvider _arenaDataProvider;
+        [Inject] private PreySpawner _preySpawner;
         
         private ArenaShotController _arenaShotController;
         private ArenaShotPerformer _arenaShotPerformer;
@@ -37,7 +39,14 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 
             _endGameButton.StartListenToClick(_endGameButtonSceneName);
             
-            print("ArenaBootstrap::Start() - Prey count: " + _arenaDataProvider.ArenaData.PreyCount);
+            Debug.Log("ArenaBootstrap::Start() - Prey count: " + _arenaDataProvider.ArenaData.PreyCount);
+            
+            TestPreySpawner();
+        }
+
+        private void TestPreySpawner()
+        {
+            _preySpawner.SpawnPrey(PreyId.EarGuy, Vector3.zero);
         }
 
         void OnDisable()
