@@ -7,13 +7,13 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Mob
     public class PreySpawner
     {
         private readonly Dictionary<PreyId, Prey> _preyPrefabs;
-        
+
         public PreySpawner(ConfigProvider configProvider)
         {
             _preyPrefabs = configProvider.PreyPrefabs;
             Debug.Log("PreySpawner initialized with " + _preyPrefabs.Count + " prey types.");
         }
-        
+
         public void SpawnPrey(PreyId preyId, Vector3 position)
         {
             Prey preyToSpawn = null;
@@ -34,7 +34,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Mob
                     return;
             }
 
-            if (preyToSpawn != null) 
+            if (preyToSpawn != null)
                 Object.Instantiate(preyToSpawn, position, Quaternion.identity);
         }
     }
