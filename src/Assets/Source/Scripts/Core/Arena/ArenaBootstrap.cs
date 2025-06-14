@@ -17,7 +17,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
         
         [Inject] private InputHandler _inputHandler;
         [Inject] private PlayerActiveOrdersModel _playerActiveOrdersModel;
-
+        [Inject] private IArenaDataProvider _arenaDataProvider;
+        
         private ArenaShotController _arenaShotController;
         private ArenaShotPerformer _arenaShotPerformer;
         private ArenaGameOverController _arenaGameOverController;
@@ -35,6 +36,8 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
             // _arenaPreyOffScreenCounter.Init(); нужен count 
 
             _endGameButton.StartListenToClick(_endGameButtonSceneName);
+            
+            print("ArenaBootstrap::Start() - Prey count: " + _arenaDataProvider.ArenaData.PreyCount);
         }
 
         void OnDisable()
