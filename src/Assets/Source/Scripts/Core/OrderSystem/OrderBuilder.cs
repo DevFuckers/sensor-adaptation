@@ -25,7 +25,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
 
         public OrderBuilder AddPart(BodyPart bodyPart, int count)
         {
-            _order.Add(bodyPart, count);
+            _order.AddPart(bodyPart, count);
             return this;
         }
     }

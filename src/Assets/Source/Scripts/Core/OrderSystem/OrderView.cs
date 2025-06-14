@@ -6,10 +6,11 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
 {
     public class OrderView : MonoBehaviour, IPointerClickHandler
     {
-        public event Action<Order, bool> OrderClicked = delegate { };
+        public event Action<Order, bool> OrderWidgetClicked = delegate { };
 
         [SerializeField] private OrderPartView _orderPartPrefab;
         [SerializeField] private Transform _orderPartsParent;
+        [SerializeField] private GameObject _selectingWidget;
         private Order _order;
         private bool _isSelected;
 
@@ -25,15 +26,20 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
 
             foreach (var part in order.Parts)
                 Instantiate(_orderPartPrefab, _orderPartsParent).Init(part);
+
+            if (_selectingWidget != null)
+                _selectingWidget.SetActive(_isSelected);
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            // show some visual effects or selecting
-
-            OrderClicked.Invoke(_order, !_isSelected);
+            OrderWidgetClicked.Invoke(_order, !_isSelected);
 
             _isSelected = !_isSelected;
+
+            if (_selectingWidget != null)
+                _selectingWidget.SetActive(_isSelected);
+            // show some visual effects or selecting
         }
     }
 }

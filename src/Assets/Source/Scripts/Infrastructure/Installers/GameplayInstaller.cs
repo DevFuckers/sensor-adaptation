@@ -1,14 +1,16 @@
 using DevFuckers.Assets.Source.Scripts.Core.Player;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.AssetLoad;
+using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.Config;
+using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.Input;
 using Zenject;
 
 public class GameplayInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        // base.InstallBindings();
-
         Container.Bind<ResourcesAssetLoader>().AsSingle();
         Container.Bind<PlayerActiveOrdersModel>().AsSingle();
+        Container.Bind<InputHandler>().AsSingle();
+        Container.Bind<ConfigProvider>().AsSingle();
     }
 }
