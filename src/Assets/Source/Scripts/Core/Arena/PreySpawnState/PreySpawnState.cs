@@ -1,5 +1,6 @@
 using DevFuckers.Assets.Source.Scripts.Core.Arena;
 using DevFuckers.Assets.Source.Scripts.Core.Mob;
+using DevFuckers.Source.Scripts.Data.Dynamic;
 using UnityEngine;
 
 namespace DevFuckers.Source.Scripts.Core.Arena.PreySpawnState
@@ -7,9 +8,9 @@ namespace DevFuckers.Source.Scripts.Core.Arena.PreySpawnState
     public class PreySpawnState : IEnterState
     {
         private readonly PreySpawner _preySpawner;
-        private readonly ArenaFullData _arenaData;
+        private readonly ArenaData _arenaData;
 
-        public PreySpawnState(ArenaFullData arenaData, PreySpawner preySpawner)
+        public PreySpawnState(ArenaData arenaData, PreySpawner preySpawner)
         {
             _arenaData = arenaData;
             _preySpawner = preySpawner;

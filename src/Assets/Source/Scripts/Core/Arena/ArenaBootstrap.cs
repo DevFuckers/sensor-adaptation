@@ -4,6 +4,7 @@ using DevFuckers.Assets.Source.Scripts.Core.Player;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Helpers;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.Input;
 using DevFuckers.Source.Scripts.Core.Arena.PreySpawnState;
+using DevFuckers.Source.Scripts.Data.Dynamic;
 using UnityEngine;
 using Zenject;
 
@@ -42,7 +43,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 
             _endGameButton.StartListenToClick(_endGameButtonSceneName);
             
-            Debug.Log("ArenaBootstrap::Start() - Prey count: " + _arenaDataProvider.ArenaData.PreyCount);
+            Debug.Log("ArenaBootstrap::Start() - Prey count: " + _arenaDataProvider.ArenaBootstrapArgs.PreyCount);
             
             
             TestPreySpawner();
@@ -50,10 +51,10 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 
         private void TestPreySpawner()
         {
-            var data = new ArenaFullData
+            var data = new ArenaData
             {
                 ArenaSize = new Vector2(100, 100),
-                PreyCount = _arenaDataProvider.ArenaData.PreyCount,
+                PreyCount = _arenaDataProvider.ArenaBootstrapArgs.PreyCount,
             };
             
             _spawnPreyState = new PreySpawnState(data, _preySpawner);

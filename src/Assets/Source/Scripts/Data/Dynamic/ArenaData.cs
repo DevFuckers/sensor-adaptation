@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace DevFuckers.Assets.Source.Scripts.Core.Arena
+namespace DevFuckers.Source.Scripts.Data.Dynamic
 {
-    public class ArenaFullData
+    public class ArenaData
     {
         public Vector2 ArenaSize;
         public int PreyCount;
