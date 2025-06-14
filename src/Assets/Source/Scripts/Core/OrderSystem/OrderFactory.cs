@@ -14,7 +14,7 @@ namespace DevFuckers.Assets.Source.Scripts.Core.OrderSystem
         {
             _orderBuilder = orderBuilder;
 
-            var orderViewPrefab = resourcesAssetLoader.Load<GameObject>(AssetPaths.ORDER_VIEW_PREFAB);
+            var orderViewPrefab = resourcesAssetLoader.Load<GameObject>(GameStaticData.ORDER_VIEW_PREFAB);
             _orderViewPrefab = orderViewPrefab.GetComponent<OrderView>();
         }
 
