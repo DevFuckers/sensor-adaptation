@@ -1,6 +1,6 @@
 namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 {
-    public class ArenaData
+    public class ArenaBootstrapArgs
     {
         public int PreyCount { get; set; }
     }

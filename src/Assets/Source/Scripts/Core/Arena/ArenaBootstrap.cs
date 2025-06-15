@@ -1,7 +1,10 @@
 using DevFuckers.Assets.Source.Scripts.Core.Menu;
+using DevFuckers.Assets.Source.Scripts.Core.Mob;
 using DevFuckers.Assets.Source.Scripts.Core.Player;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Helpers;
 using DevFuckers.Assets.Source.Scripts.Infrastructure.Services.Input;
+using DevFuckers.Source.Scripts.Core.Arena.PreySpawnState;
+using DevFuckers.Source.Scripts.Data.Dynamic;
 using UnityEngine;
 using Zenject;
 
@@ -18,10 +21,13 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
         [Inject] private InputHandler _inputHandler;
         [Inject] private PlayerActiveOrdersModel _playerActiveOrdersModel;
         [Inject] private IArenaDataProvider _arenaDataProvider;
+        [Inject] private PreySpawner _preySpawner;
         
         private ArenaShotController _arenaShotController;
         private ArenaShotPerformer _arenaShotPerformer;
         private ArenaGameOverController _arenaGameOverController;
+        
+        private IEnterState _spawnPreyState;
 
         void Start()
         {
@@ -37,7 +43,22 @@ namespace DevFuckers.Assets.Source.Scripts.Core.Arena
 
             _endGameButton.StartListenToClick(_endGameButtonSceneName);
             
-            print("ArenaBootstrap::Start() - Prey count: " + _arenaDataProvider.ArenaData.PreyCount);
+            Debug.Log("ArenaBootstrap::Start() - Prey count: " + _arenaDataProvider.ArenaBootstrapArgs.PreyCount);
+            
+            
+            TestPreySpawner();
+        }
+
+        private void TestPreySpawner()
+        {
+            var data = new ArenaData
+            {
+                ArenaSize = new Vector2(100, 100),
+                PreyCount = _arenaDataProvider.ArenaBootstrapArgs.PreyCount,
+            };
+            
+            _spawnPreyState = new PreySpawnState(data, _preySpawner);
+            _spawnPreyState.Enter();
         }
 
         void OnDisable()
